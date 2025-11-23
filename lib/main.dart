@@ -18,14 +18,14 @@ class MeowstodonLintPlugin extends Plugin {
   void register(PluginRegistry registry) {
     registry.registerWarningRule(FreezedModelsRule());
     registry.registerWarningRule(NoPumpConstDurationRule());
-    registry.registerWarningRule(OneClassPerFileRule());
     registry.registerWarningRule(NoRegisterFallbackValueRule());
+    registry.registerWarningRule(OneClassPerFileRule());
     registry.registerWarningRule(OneRiverpodPerFileRule());
     registry.registerWarningRule(ProviderRemoteDataErrorHandlingRule());
+    registry.registerWarningRule(RiverpodProvidersRule());
     registry.registerWarningRule(SheetLayoutLintRule());
     registry.registerWarningRule(SheetNameLintRule());
     registry.registerWarningRule(SheetShowLintRule());
-    registry.registerWarningRule(RiverpodProvidersRule());
   }
 
   @override
