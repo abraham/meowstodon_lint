@@ -21,10 +21,7 @@ Rules
 ```yml
 # analysis_options.yaml
 plugins:
-  meowstodon_lint:
-    git:
-      url: https://github.com/abraham/meowstodon_lint.git
-      ref: 52a60caf33b598b74ed88259f5b9c796550774fb
+  meowstodon_lint: ^1.0.0
 ```
 
 ## Usage

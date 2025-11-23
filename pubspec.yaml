@@ -1,6 +1,6 @@
 name: meowstodon_lint
-description: Custom meowstodon lint rules
-version: 1.0.0
+description: Custom meowstodon lint rules for a more consistent codebase.
+version: 1.0.0+1
 repository: https://github.com/abraham/meowstodon_lint
 
 environment:
