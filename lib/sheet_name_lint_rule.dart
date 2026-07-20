@@ -75,11 +75,11 @@ class _Visitor extends SimpleAstVisitor<void> {
       return;
     }
 
-    final className = enclosingClass.name.lexeme;
+    final className = enclosingClass.namePart.typeName.lexeme;
 
     // Check if the class name ends with "Sheet" but not "BottomSheet"
     if (!className.endsWith('Sheet') || className.endsWith('BottomSheet')) {
-      rule.reportAtToken(enclosingClass.name);
+      rule.reportAtToken(enclosingClass.namePart.typeName);
     }
   }
 }

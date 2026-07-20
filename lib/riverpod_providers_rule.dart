@@ -68,8 +68,8 @@ class _Visitor extends SimpleAstVisitor<void> {
       name = node.name.lexeme;
       metadata = node.metadata;
     } else if (node is ClassDeclaration) {
-      nameToken = node.name;
-      name = node.name.lexeme;
+      nameToken = node.namePart.typeName;
+      name = node.namePart.typeName.lexeme;
       metadata = node.metadata;
     }
 
