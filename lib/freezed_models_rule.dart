@@ -55,12 +55,12 @@ class _Visitor extends SimpleAstVisitor<void> {
 
     // Check if the class has @freezed annotation
     if (!_hasFreezedAnnotation(node)) {
-      rule.reportAtToken(node.name);
+      rule.reportAtToken(node.namePart.typeName);
     }
   }
 
   bool _shouldSkipClass(ClassDeclaration node) {
-    final className = node.name.lexeme;
+    final className = node.namePart.typeName.lexeme;
 
     // Skip classes that extend other classes (except Object implicitly)
     // Freezed doesn't work with inheritance
@@ -90,7 +90,7 @@ class _Visitor extends SimpleAstVisitor<void> {
     // Check if it's an abstract class with only abstract members/getters
     if (node.abstractKeyword == null) return false;
 
-    final hasConcreteImplementation = node.members.any((member) {
+    final hasConcreteImplementation = node.body.members.any((member) {
       if (member is MethodDeclaration) {
         return member.body is! EmptyFunctionBody;
       }
@@ -111,8 +111,8 @@ class _Visitor extends SimpleAstVisitor<void> {
 
   bool _isConstantsOnlyClass(ClassDeclaration node) {
     // Check if all constructors are const and all fields are static const
-    final constructors = node.members.whereType<ConstructorDeclaration>();
-    final fields = node.members.whereType<FieldDeclaration>();
+    final constructors = node.body.members.whereType<ConstructorDeclaration>();
+    final fields = node.body.members.whereType<FieldDeclaration>();
 
     // If it has non-const constructors, it's not a constants-only class
     if (constructors.any((c) => c.constKeyword == null)) {

@@ -63,7 +63,7 @@ class _Visitor extends SimpleAstVisitor<void> {
     final extendsClause = node.extendsClause;
     if (extendsClause == null) return false;
 
-    final buildMethod = node.members
+    final buildMethod = node.body.members
         .whereType<MethodDeclaration>()
         .where((m) => m.name.lexeme == 'build')
         .firstOrNull;
@@ -76,7 +76,7 @@ class _Visitor extends SimpleAstVisitor<void> {
   }
 
   void _checkMethodsForErrorHandling(ClassDeclaration node) {
-    for (final member in node.members) {
+    for (final member in node.body.members) {
       if (member is! MethodDeclaration) continue;
 
       if (member.name.lexeme == 'build') continue;

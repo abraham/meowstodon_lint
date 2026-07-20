@@ -58,7 +58,7 @@ class _Visitor extends SimpleAstVisitor<void> {
     // Find all classes in the compilation unit
     for (final declaration in node.declarations) {
       if (declaration is ClassDeclaration) {
-        if (declaration.name.lexeme.startsWith('_')) {
+        if (declaration.namePart.typeName.lexeme.startsWith('_')) {
           privateClasses.add(declaration);
         } else {
           publicClasses.add(declaration);
@@ -69,15 +69,15 @@ class _Visitor extends SimpleAstVisitor<void> {
     // Report error if we have more than one public class
     if (publicClasses.length > 1) {
       for (int i = 1; i < publicClasses.length; i++) {
-        rule.reportAtToken(publicClasses[i].name);
+        rule.reportAtToken(publicClasses[i].namePart.typeName);
       }
     }
 
     // Report error for private classes that are not state classes or visitor classes
     for (final privateClass in privateClasses) {
-      final className = privateClass.name.lexeme;
+      final className = privateClass.namePart.typeName.lexeme;
       if (!className.endsWith('State') && !className.endsWith('Visitor')) {
-        rule.reportAtToken(privateClass.name);
+        rule.reportAtToken(privateClass.namePart.typeName);
       }
     }
   }

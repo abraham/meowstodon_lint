@@ -48,7 +48,7 @@ class _Visitor extends SimpleAstVisitor<void> {
       return;
     }
 
-    final className = node.name.lexeme;
+    final className = node.namePart.typeName.lexeme;
 
     // Check if the class name ends with "Sheet"
     if (!className.endsWith('Sheet')) {
@@ -74,7 +74,7 @@ class _Visitor extends SimpleAstVisitor<void> {
 
     // Find the build method
     MethodDeclaration? buildMethod;
-    for (final member in node.members) {
+    for (final member in node.body.members) {
       if (member is MethodDeclaration && member.name.lexeme == 'build') {
         buildMethod = member;
         break;
